@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sri Siddheshwara Constructions</title>
+<link rel="icon" type="image/jpg" href="images/Layer 000.png">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy: #1a2f5e;
+    --navy-deep: #0f1e3d;
+    --navy-mid: #243870;
+    --steel: #7d8fa8;
+    --steel-light: #a8b8cc;
+    --silver: #c8d4e0;
+    --gold: #c9a84c;
+    --white: #f5f7fa;
+    --off-white: #eef1f5;
+    --dark: #0a0f1e;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--dark);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index:100;
+    padding: 18px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(10,15,30,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(200,212,224,0.08);
+    transition: all .3s;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .nav-logo-img {
+    height: 44px;
+    width: auto;
+    border-radius: 4px;
+  }
+  .nav-logo-text {
+    display: flex; flex-direction: column;
+    line-height: 1.1;
+  }
+  .nav-logo-text span:first-child {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px; font-weight: 700;
+    color: var(--white); letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .nav-logo-text span:last-child {
+    font-size: 10px; color: var(--steel-light);
+    letter-spacing: 3px; text-transform: uppercase;
+  }
+  .nav-links {
+    display: flex; gap: 36px; list-style: none;
+  }
+  .nav-links a {
+    color: var(--silver); text-decoration: none;
+    font-size: 13px; font-weight: 500;
+    letter-spacing: 2px; text-transform: uppercase;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    padding: 10px 28px;
+    background: var(--navy);
+    border: 1.5px solid var(--steel);
+    color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    cursor: pointer; border-radius: 4px;
+    transition: all .2s;
+  }
+  .nav-cta:hover {
+    background: var(--gold); border-color: var(--gold); color: var(--dark);
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; overflow: hidden;
+    padding: 160px 60px 200px;
+    background: var(--dark);
+  }
+
+  .hero-bg {
+    position: absolute; inset:0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(26,47,94,0.55) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 20% 70%, rgba(15,30,61,0.4) 0%, transparent 60%);
+  }
+
+  /* Grid texture */
+  .hero-grid {
+    position: absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(125,143,168,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(125,143,168,0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* Animated blueprint lines */
+  .blueprint-lines {
+    position: absolute; right: 0; top: 0; bottom: 0;
+    width: 55%;
+    opacity: 0.12;
+    overflow: hidden;
+  }
+  .blueprint-lines svg { width:100%; height:100%; }
+
+  .hero-row {
+    position: relative; z-index: 2;
+    display: flex; align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    width: 100%;
+    flex-wrap: wrap; /* Allows elements to wrap on smaller screens */
+  }
+
+  .hero-content {
+    position: relative; z-index:2;
+    flex: 1 1 500px; /* Allows content to shrink dynamically */
+    max-width: 580px;
+    animation: fadeUp .9s ease forwards;
+  }
+
+  /* 3D Construction Canvas */
+  .hero-3d {
+    position: relative; z-index: 2;
+    flex: 1 1 400px; /* Allows the 3D container to scale down seamlessly */
+    width: 100%;
+    max-width: 480px;
+    aspect-ratio: 1 / 1; /* Automatically maintains a perfect square shape based on width */
+    max-height: 480px;
+    animation: fadeUp 1.1s ease forwards;
+    margin: 0 auto; /* Keeps it centered when it stacks below the text */
+  }
+  #constructionCanvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+  }
+  .hero-3d-label {
+    position: absolute;
+    bottom: -8px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--steel);
+    white-space: nowrap;
+  }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+  }
+  .hero-tag::before {
+    content:''; display:block;
+    width:32px; height:1.5px; background:var(--gold);
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 7vw, 88px);
+    font-weight: 900;
+    line-height: 1.02;
+    letter-spacing: -1px;
+    margin-bottom: 28px;
+  }
+  h1 em {
+    font-style: italic;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--steel-light);
+  }
+
+  .hero-desc {
+    font-size: 17px; font-weight: 300;
+    color: var(--steel-light); line-height: 1.7;
+    max-width: 500px; margin-bottom: 48px;
+  }
+
+  .hero-btns {
+    display: flex; gap: 16px; flex-wrap: wrap;
+  }
+  .btn-primary {
+    padding: 16px 40px;
+    background: var(--navy);
+    border: 2px solid var(--navy-mid);
+    color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    cursor: pointer; border-radius: 4px;
+    transition: all .25s;
+  }
+  .btn-primary:hover {
+    background: var(--gold); border-color: var(--gold); color: var(--dark);
+    transform: translateY(-2px);
+  }
+  .btn-outline {
+    padding: 16px 40px;
+    background: transparent;
+    border: 2px solid rgba(200,212,224,0.25);
+    color: var(--silver);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    cursor: pointer; border-radius: 4px;
+    transition: all .25s;
+  }
+  .btn-outline:hover {
+    border-color: var(--silver); color: var(--white);
+  }
+
+  /* Stats bar */
+  .stats-bar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 32px 60px;
+    display: flex; gap: 0;
+    border-top: 1px solid rgba(200,212,224,0.1);
+    background: rgba(10,15,30,0.6);
+    backdrop-filter: blur(10px);
+    z-index:2;
+  }
+  .stat-item {
+    flex:1; padding: 0 40px;
+    border-right: 1px solid rgba(200,212,224,0.12);
+    animation: fadeUp 1s ease forwards;
+  }
+  .stat-item:first-child { padding-left: 0; }
+  .stat-item:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px; font-weight: 700;
+    color: var(--white); line-height:1;
+  }
+  .stat-num span { color: var(--gold); font-size: 28px; }
+  .stat-label {
+    font-size: 11px; color: var(--steel);
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  /* ── ABOUT ── */
+  #about {
+    padding: 120px 60px;
+    background: var(--off-white);
+    color: var(--dark);
+    position: relative; overflow: hidden;
+  }
+  .about-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 100px;
+    align-items: center;
+  }
+  .section-label {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--navy); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::after {
+    content:''; flex:1; height:1px; background: var(--navy); opacity:.2;
+  }
+  .about-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 700; color: var(--navy-deep);
+    line-height: 1.15; margin-bottom: 24px;
+  }
+  .about-text {
+    font-size: 16px; color: #4a5568;
+    line-height: 1.8; margin-bottom: 32px;
+  }
+
+  /* Features grid */
+  .features-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+    background: rgba(26,47,94,0.08);
+    border-radius: 12px; overflow: hidden;
+  }
+  .feature-card {
+    background: white; padding: 32px 28px;
+    transition: background .2s;
+  }
+  .feature-card:hover { background: var(--navy-deep); }
+  .feature-card:hover .feature-icon { color: var(--gold); }
+  .feature-card:hover .feature-title { color: white; }
+  .feature-card:hover .feature-desc { color: var(--steel-light); }
+  .feature-icon {
+    font-size: 28px; margin-bottom: 14px;
+    color: var(--navy); transition: color .2s;
+  }
+  .feature-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 17px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    color: var(--navy-deep); margin-bottom: 8px;
+    transition: color .2s;
+  }
+  .feature-desc {
+    font-size: 13px; color: #6b7280; line-height: 1.6;
+    transition: color .2s;
+  }
+
+  /* ── SERVICES ── */
+  #services {
+    padding: 120px 60px;
+    background: var(--dark);
+    position: relative; overflow: hidden;
+  }
+  #services::before {
+    content:'';
+    position:absolute; top:0; left:0; right:0; bottom:0;
+    background-image:
+      linear-gradient(rgba(125,143,168,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(125,143,168,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .section-header {
+    max-width: 1200px; margin: 0 auto 72px;
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 40px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 4.5vw, 60px);
+    font-weight: 700; line-height: 1.1;
+  }
+  .section-title em {
+    font-style: italic; color: var(--steel-light);
+  }
+  .services-grid {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .service-card {
+    background: rgba(26,47,94,0.2);
+    border: 1px solid rgba(125,143,168,0.15);
+    border-radius: 12px; padding: 48px 36px;
+    position: relative; overflow: hidden;
+    transition: all .35s;
+    cursor: default;
+  }
+  .service-card::after {
+    content:'';
+    position:absolute; bottom:0; left:0; right:0; height:3px;
+    background: linear-gradient(90deg, var(--navy-mid), var(--steel));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .35s;
+  }
+  .service-card:hover {
+    background: rgba(26,47,94,0.5);
+    border-color: rgba(125,143,168,0.35);
+    transform: translateY(-6px);
+  }
+  .service-card:hover::after { transform: scaleX(1); }
+  .service-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px; font-weight: 900;
+    color: rgba(125,143,168,0.1);
+    line-height:1; margin-bottom: -16px;
+  }
+  .service-icon {
+    font-size: 32px; margin-bottom: 20px; display: block;
+  }
+  .service-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    color: var(--white); margin-bottom: 16px;
+  }
+  .service-desc {
+    font-size: 14px; color: var(--steel); line-height: 1.7;
+  }
+  .service-tags {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px;
+  }
+  .service-tag {
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 20px;
+    border: 1px solid rgba(125,143,168,0.3);
+    color: var(--steel-light);
+  }
+
+  /* ── WHY US ── */
+  #why {
+    padding: 120px 60px;
+    background: var(--navy-deep);
+    position: relative; overflow: hidden;
+  }
+  .why-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px;
+    align-items: center;
+  }
+  .why-list { display: flex; flex-direction: column; gap: 0; }
+  .why-item {
+    padding: 28px 0;
+    border-bottom: 1px solid rgba(200,212,224,0.1);
+    display: flex; gap: 24px; align-items: flex-start;
+    cursor: default; transition: padding-left .2s;
+  }
+  .why-item:hover { padding-left: 12px; }
+  .why-item:first-child { border-top: 1px solid rgba(200,212,224,0.1); }
+  .why-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px; color: var(--gold); font-weight: 700;
+    padding-top: 4px; min-width: 28px;
+  }
+  .why-content {}
+  .why-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 19px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+    color: var(--white); margin-bottom: 8px;
+  }
+  .why-desc {
+    font-size: 14px; color: var(--steel); line-height: 1.6;
+  }
+  .why-visual {
+    position: relative;
+    background: rgba(10,15,30,0.5);
+    border-radius: 16px; padding: 48px;
+    border: 1px solid rgba(125,143,168,0.12);
+    text-align: center;
+  }
+  .big-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 100px; font-weight: 900;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(200,212,224,0.3);
+    line-height:1;
+  }
+  .why-tagline {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 700;
+    color: var(--white); margin: 16px 0 12px;
+    line-height: 1.3;
+  }
+  .why-sub {
+    font-size: 14px; color: var(--steel);
+    letter-spacing: 2px; text-transform: uppercase;
+  }
+  .trust-badges {
+    display: flex; gap: 16px; justify-content: center; margin-top: 36px; flex-wrap: wrap;
+  }
+  .badge {
+    padding: 10px 20px;
+    background: rgba(26,47,94,0.4);
+    border: 1px solid rgba(125,143,168,0.2);
+    border-radius: 6px;
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--steel-light);
+  }
+
+  /* ── PROCESS ── */
+  #process {
+    padding: 120px 60px;
+    background: var(--off-white); color: var(--dark);
+  }
+  .process-inner { max-width: 1200px; margin: 0 auto; }
+  .process-steps {
+    display: grid; grid-template-columns: repeat(4,1fr); gap: 0;
+    margin-top: 72px; position: relative;
+  }
+  .process-steps::before {
+    content:'';
+    position:absolute; top: 36px; left: 10%; right: 10%;
+    height: 1px; background: var(--navy); opacity:.15;
+  }
+  .process-step { text-align: center; padding: 0 20px; }
+  .step-circle {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: var(--navy); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700;
+    margin: 0 auto 28px; position: relative; z-index:1;
+    box-shadow: 0 8px 24px rgba(26,47,94,0.3);
+    transition: all .3s;
+  }
+  .process-step:hover .step-circle {
+    background: var(--gold); transform: scale(1.1);
+  }
+  .step-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 17px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+    color: var(--navy-deep); margin-bottom: 12px;
+  }
+  .step-desc {
+    font-size: 13px; color: #6b7280; line-height: 1.6;
+  }
+
+  /* ── OUR VALUES ── */
+  #values {
+    padding: 120px 60px;
+    background: var(--dark);
+  }
+  .values-inner { max-width: 1200px; margin: 0 auto; }
+  .values-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    margin-top: 72px;
+  }
+  .value-card {
+    background: rgba(26,47,94,0.15);
+    border: 1px solid rgba(125,143,168,0.1);
+    border-radius: 12px; padding: 48px 36px;
+    position: relative; text-align: center;
+  }
+  .value-icon {
+    font-size: 48px; margin-bottom: 24px; display: inline-block;
+  }
+  .value-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 24px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+    color: var(--white); margin-bottom: 16px;
+  }
+  .value-text {
+    font-size: 15px; color: var(--steel-light); line-height: 1.7;
+  }
+
+  /* ── CTA ── */
+  #cta {
+    padding: 120px 60px;
+    background: var(--navy-deep);
+    text-align: center; position: relative; overflow: hidden;
+  }
+  #cta::before {
+    content:'';
+    position:absolute; inset:0;
+    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(36,56,112,0.8) 0%, transparent 70%);
+  }
+  .cta-inner { position:relative; z-index:1; max-width: 700px; margin: 0 auto; }
+  .cta-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 900; line-height: 1.1; margin-bottom: 24px;
+  }
+  .cta-sub {
+    font-size: 16px; color: var(--steel-light);
+    line-height: 1.7; margin-bottom: 48px;
+  }
+  .cta-form {
+    display: flex; gap: 12px; max-width: 480px; margin: 0 auto;
+    flex-wrap: wrap; justify-content: center;
+  }
+  .cta-input {
+    flex:1; min-width: 200px;
+    padding: 16px 24px;
+    background: rgba(255,255,255,0.06);
+    border: 1.5px solid rgba(200,212,224,0.2);
+    border-radius: 6px; color: var(--white);
+    font-family: 'Barlow', sans-serif; font-size: 14px;
+    outline: none; transition: border-color .2s;
+  }
+  .cta-input::placeholder { color: var(--steel); }
+  .cta-input:focus { border-color: var(--steel-light); }
+  .btn-cta {
+    padding: 16px 36px;
+    background: var(--gold);
+    border: 2px solid var(--gold);
+    color: var(--dark);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    cursor: pointer; border-radius: 6px;
+    transition: all .2s; white-space: nowrap;
+  }
+  .btn-cta:hover { background: #b8943c; border-color: #b8943c; }
+
+  .contact-info {
+    display: flex; justify-content: center; gap: 48px;
+    margin-top: 56px; flex-wrap: wrap;
+  }
+  .contact-item {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 14px; color: var(--steel-light);
+  }
+  .contact-icon { font-size: 18px; color: var(--gold); }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 48px 60px;
+    background: var(--dark);
+    border-top: 1px solid rgba(200,212,224,0.08);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 24px;
+  }
+  .footer-brand {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--silver);
+  }
+  .footer-brand span { color: var(--steel); font-weight: 400; font-size: 13px; display: block; margin-top: 4px; }
+  .footer-links {
+    display: flex; gap: 32px; list-style: none; flex-wrap: wrap;
+  }
+  .footer-links a {
+    color: var(--steel); text-decoration: none;
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    transition: color .2s;
+  }
+  .footer-links a:hover { color: var(--white); }
+  .footer-copy {
+    font-size: 12px; color: rgba(125,143,168,0.5);
+    letter-spacing: 1px;
+  }
+
+  /* ── CUSTOM SUCCESS POPUP ── */
+  .modal-overlay {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(10,15,30,0.85); /* Dark blur over the website */
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; visibility: hidden; /* Hidden by default */
+    transition: all 0.4s ease;
+  }
+  .modal-overlay.show {
+    opacity: 1; visibility: visible; /* Class added by JS to reveal it */
+  }
+  .modal-content {
+    background: var(--navy-deep);
+    border: 1px solid rgba(200,212,224,0.2);
+    padding: 40px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    transform: translateY(30px); /* Starts slightly lower */
+    transition: all 0.4s ease;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  }
+  .modal-overlay.show .modal-content {
+    transform: translateY(0); /* Slides up smoothly */
+  }
+  .modal-icon {
+    width: 64px; height: 64px;
+    background: var(--gold);
+    color: var(--dark);
+    font-size: 32px; font-weight: bold;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+  }
+  .modal-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; color: var(--white); margin-bottom: 12px;
+  }
+  .modal-content p {
+    color: var(--steel-light); font-size: 16px; margin-bottom: 28px; line-height: 1.6;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(30px); }
+    to { opacity:1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity:0; transform: translateY(40px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .reveal.visible {
+    opacity:1; transform: translateY(0);
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display:none; }
+    /* ENSURING MOBILE DOESN'T HIDE BUTTONS EITHER */
+    #hero { padding: 120px 24px 200px; }
+    .stats-bar { padding: 24px; flex-wrap: wrap; gap: 20px; }
+    .stat-item { border:none; padding: 0 20px; flex: 1 0 40%; }
+    #about, #services, #why, #process, #values, #cta { padding: 80px 24px; }
+    .about-inner, .why-inner { grid-template-columns: 1fr; gap: 48px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .process-steps::before { display:none; }
+    .values-grid { grid-template-columns: 1fr; }
+    
+    footer { flex-direction: column; text-align: center; }
+    .footer-links { justify-content: center; }
+    .cta-form { flex-direction: column; align-items: stretch; }
+    .contact-info { flex-direction: column; align-items: center; gap: 20px; }
+  }
+
+  /* ── TABLET & SMALL LAPTOP (< 1140px) ── */
+  @media (max-width: 1140px) {
+    .hero-row {
+      flex-direction: column; /* Stacks text and 3D canvas vertically */
+      text-align: center;
+      gap: 60px; /* Adds breathing room between text and the 3D object */
+    }
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 100%;
+    }
+    .hero-tag {
+      justify-content: center;
+    }
+    .hero-desc {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-btns {
+      justify-content: center;
+    }
+    .hero-3d {
+      max-width: 400px; /* Scales the 3D element down slightly for better tablet viewing */
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <img src="images/Layer 000.png" alt="SSC Logo" class="nav-logo-img">
+    <div class="nav-logo-text">
+      <span>Sri Siddheshwara</span>
+      <span>Construction</span>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#values">Our Values</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Get a Quote</button>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="blueprint-lines">
+    <svg viewBox="0 0 600 800" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <rect x="60" y="200" width="120" height="580" stroke="#a8b8cc" stroke-width="1.5"/>
+      <rect x="80" y="220" width="30" height="40" stroke="#a8b8cc" stroke-width="1"/>
+      <rect x="120" y="220" width="30" height="40" stroke="#a8b8cc" stroke-width="1"/>
+      <rect x="80" y="280" width="30" height="40" stroke="#a8b8cc" stroke-width="1"/>
+      <rect x="120" y="280" width="30" height="40" stroke="#a8b8cc" stroke-width="1"/>
+      <rect x="80" y="340" width="30" height="40" stroke="#a8b8cc" stroke-width="1"/>
+      <rect x="120" y="340" width="30" height="40" stroke="#a8b8cc" stroke-width="1"/>
+      <rect x="80" y="400" width="30" height="40" stroke="#a8b8cc" stroke-width="1"/>
+      <rect x="120" y="400" width="30" height="40" stroke="#a8b8cc" stroke-width="1"/>
+      <rect x="80" y="460" width="30" height="40" stroke="#a8b8cc" stroke-width="1"/>
+      <rect x="120" y="460" width="30" height="40" stroke="#a8b8cc" stroke-width="1"/>
+      <rect x="220" y="80" width="100" height="700" stroke="#a8b8cc" stroke-width="1.5"/>
+      <rect x="240" y="100" width="25" height="40" stroke="#a8b8cc" stroke-width="1"/>
+      <rect x="275" y="100" width="25" height="40" stroke="#a8b8cc" stroke-width="1"/>
+      <rect x="240" y="160" width="25" height="40" stroke="#a8b8cc" stroke-width="1"/>
+      <rect x="275" y="160" width="25" height="40" stroke="#a8b8cc" stroke-width="1"/>
+      <rect x="240" y="220" width="25" height="40" stroke="#a8b8cc" stroke-width="1"/>
+      <rect x="275" y="220" width="25" height="40" stroke="#a8b8cc" stroke-width="1"/>
+      <rect x="240" y="280" width="25" height="40" stroke="#a8b8cc" stroke-width="1"/>
+      <rect x="275" y="280" width="25" height="40" stroke="#a8b8cc" stroke-width="1"/>
+      <rect x="240" y="340" width="25" height="40" stroke="#a8b8cc" stroke-width="1"/>
+      <rect x="275" y="340" width="25" height="40" stroke="#a8b8cc" stroke-width="1"/>
+      <rect x="240" y="400" width="25" height="40" stroke="#a8b8cc" stroke-width="1"/>
+      <rect x="275" y="400" width="25" height="40" stroke="#a8b8cc" stroke-width="1"/>
+      <polyline points="360,500 430,420 500,500" stroke="#a8b8cc" stroke-width="1.5"/>
+      <rect x="375" y="500" width="110" height="100" stroke="#a8b8cc" stroke-width="1.5"/>
+      <rect x="410" y="540" width="30" height="60" stroke="#a8b8cc" stroke-width="1"/>
+      <line x1="20" y1="200" x2="20" y2="780" stroke="#a8b8cc" stroke-width="0.5" stroke-dasharray="4,4"/>
+      <line x1="15" y1="200" x2="25" y2="200" stroke="#a8b8cc" stroke-width="0.5"/>
+      <line x1="15" y1="780" x2="25" y2="780" stroke="#a8b8cc" stroke-width="0.5"/>
+      <text x="10" y="500" fill="#a8b8cc" font-size="10" transform="rotate(-90 10 500)">24.0 m</text>
+      <line x1="60" y1="790" x2="180" y2="790" stroke="#a8b8cc" stroke-width="0.5" stroke-dasharray="4,4"/>
+      <text x="90" y="805" fill="#a8b8cc" font-size="10">8.0 m</text>
+    </svg>
+  </div>
+
+  <div class="hero-row">
+    <div class="hero-content">
+      <div class="hero-tag">Premier Construction & Development</div>
+      <h1>Building<br/><em>Futures</em><br/>With Precision</h1>
+      <p class="hero-desc">Sri Siddheshwara Construction delivers high-quality, innovative building solutions — from dream homes to landmark commercial developments.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Explore Services</button>
+        <button class="btn-outline" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Start a Project</button>
+      </div>
+    </div>
+
+    <!-- 3D Construction Animation -->
+    <div class="hero-3d">
+      <canvas id="constructionCanvas"></canvas>
+      <div class="hero-3d-label"></div>
+    </div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-num">100<span>%</span></div>
+      <div class="stat-label">Transparency</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">A<span>+</span></div>
+      <div class="stat-label">Grade Materials</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">24<span>/7</span></div>
+      <div class="stat-label">Client Support</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">100<span>%</span></div>
+      <div class="stat-label">Commitment</div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-inner">
+    <div class="reveal">
+      <div class="section-label">Who We Are</div>
+      <h2 class="about-title">A Legacy Built on Trust & Craftsmanship</h2>
+      <p class="about-text">Sri Siddheshwara Construction (SSC) is a premier construction and development firm dedicated to delivering high-quality, innovative building solutions. From residential homes to large-scale commercial projects, we bring vision to life with uncompromising standards.</p>
+      <p class="about-text" style="margin-bottom:0;">Every project is a testament to our commitment — blending modern engineering with time-tested craftsmanship to create spaces that stand for generations.</p>
+    </div>
+    <div class="reveal">
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">💡</div>
+          <div class="feature-title">Smart Planning</div>
+          <div class="feature-desc">Efficient resource management to keep your project within budget.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⏱️</div>
+          <div class="feature-title">On-Time Delivery</div>
+          <div class="feature-desc">Strict project timelines with transparent milestone tracking.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💎</div>
+          <div class="feature-title">Premium Quality</div>
+          <div class="feature-desc">Only the finest materials sourced from trusted suppliers.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🤝</div>
+          <div class="feature-title">Client-Centered</div>
+          <div class="feature-desc">Dedicated support from blueprint to handover and beyond.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label" style="color:var(--steel-light)">What We Build</div>
+      <h2 class="section-title">Our <em>Core</em><br/>Services</h2>
+    </div>
+    <!-- <p style="max-width:320px; color:var(--steel); font-size:15px; line-height:1.7;">From concept to completion, SSC handles every phase with expertise and dedication.</p> -->
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-num">01</div>
+      <span class="service-icon">🏠</span>
+      <div class="service-name">Residential Construction</div>
+      <p class="service-desc">Custom homes, villas, designed to match your lifestyle and budget.</p>
+      <div class="service-tags">
+        <span class="service-tag">Villas</span>
+        <span class="service-tag">Apartments</span>
+        <span class="service-tag">Custom Homes</span>
+      </div>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">02</div>
+      <span class="service-icon">🏢</span>
+      <div class="service-name">Commercial Projects</div>
+      <p class="service-desc">Office complexes, retail spaces, and mixed-use developments built to the highest commercial standards.</p>
+      <div class="service-tags">
+        <span class="service-tag">Offices</span>
+        <span class="service-tag">Retail</span>
+        <span class="service-tag">Mixed-Use</span>
+      </div>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">03</div>
+      <span class="service-icon">🏭</span>
+      <div class="service-name">Industrial Construction</div>
+      <p class="service-desc">Warehouses, factories, and industrial facilities constructed with precision for maximum operational efficiency.</p>
+      <div class="service-tags">
+        <span class="service-tag">Warehouses</span>
+        <span class="service-tag">Factories</span>
+        <span class="service-tag">Facilities</span>
+      </div>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">04</div>
+      <span class="service-icon">🔨</span>
+      <div class="service-name">Renovation & Remodelling</div>
+      <p class="service-desc">Breathe new life into existing spaces with our expert renovation and interior remodelling services.</p>
+      <div class="service-tags">
+        <span class="service-tag">Interiors</span>
+        <span class="service-tag">Renovation</span>
+        <span class="service-tag">Upgrades</span>
+      </div>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">05</div>
+      <span class="service-icon">📐</span>
+      <div class="service-name">Interior Design</div>
+      <p class="service-desc">Complete planning and Design for all Corner of the Home.</p>
+      <div class="service-tags">
+        <span class="service-tag">3D Design</span>
+        <span class="service-tag">Planning</span>
+        <span class="service-tag">Drawings</span>
+      </div>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">06</div>
+      <span class="service-icon">🏡</span>
+      <div class="service-name">Rural Construction</div>
+      <p class="service-desc">Homes, Animal Shed and Complete Development to match your Budget.</p>
+      <div class="service-tags">
+        <span class="service-tag">Eco-Friendly</span>
+        <span class="service-tag">Sustainable</span>
+        <span class="service-tag">Budget-Smart </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="why-inner">
+    <div class="reveal">
+      <div class="section-label" style="color:var(--steel-light)">Why SSC</div>
+      <h2 class="section-title" style="margin-bottom:48px;">What Sets<br/><em>Us Apart</em></h2>
+      <div class="why-list">
+        <div class="why-item">
+          <div class="why-num">01</div>
+          <div class="why-content">
+            <div class="why-title">Transparent Budgeting</div>
+            <p class="why-desc">No hidden costs. Detailed quotations and real-time budget tracking throughout your project.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">02</div>
+          <div class="why-content">
+            <div class="why-title">In-House Expert Team</div>
+            <p class="why-desc">Architects, engineers, and skilled workers — all under one roof for seamless coordination.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">03</div>
+          <div class="why-content">
+            <div class="why-title">Zero-Compromise Quality</div>
+            <p class="why-desc">Every material meets our strict quality standards before it reaches your construction site.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">04</div>
+          <div class="why-content">
+            <div class="why-title">End-to-End Support</div>
+            <p class="why-desc">From permits and approvals to final handover — we handle everything so you don't have to.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="why-visual reveal">
+      <div class="big-number">100%</div>
+      <div class="why-tagline">Committed to Building<br/>Trust All Over South Karnataka</div>
+      <div class="why-sub">Mysuru & Beyond</div>
+      <div class="trust-badges">
+        <div class="badge">Quality Assured</div>
+        <div class="badge">Licensed Builders</div>
+        <div class="badge">Modern Designs</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="process-inner">
+    <div class="reveal" style="text-align:center;">
+      <div class="section-label" style="justify-content:center;">How We Work</div>
+      <h2 class="about-title" style="text-align:center;">Our Simple <span style="color:var(--navy)">4-Step</span> Process</h2>
+    </div>
+    <div class="process-steps reveal">
+      <div class="process-step">
+        <div class="step-circle">1</div>
+        <div class="step-title">Consultation</div>
+        <p class="step-desc">We understand your vision, requirements, and budget in detail during a free initial meeting.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-circle">2</div>
+        <div class="step-title">Design & Plan</div>
+        <p class="step-desc">Our architects create detailed designs and structural plans tailored to your needs.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-circle">3</div>
+        <div class="step-title">Construction</div>
+        <p class="step-desc">Expert team begins execution with regular progress updates and quality checks.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-circle">4</div>
+        <div class="step-title">Handover</div>
+        <p class="step-desc">Final inspection, documentation, and keys to your completed dream space.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="values">
+  <div class="values-inner">
+    <div class="section-header reveal">
+      <div>
+        <div class="section-label" style="color:var(--steel-light)">Our Foundation</div>
+        <h2 class="section-title">The Core <em>Values</em><br/>We Build On</h2>
+      </div>
+    </div>
+    <div class="values-grid">
+      <div class="value-card reveal">
+        <span class="value-icon">🛡️</span>
+        <h3 class="value-title">Integrity</h3>
+        <p class="value-text">We believe in complete transparency. From budgeting to material selection and timelines, you are always in the loop with no hidden surprises.</p>
+      </div>
+      <div class="value-card reveal">
+        <span class="value-icon">💡</span>
+        <h3 class="value-title">Innovation</h3>
+        <p class="value-text">Leveraging the latest construction techniques and modern architectural designs to build functional, beautiful spaces ready for tomorrow.</p>
+      </div>
+      <div class="value-card reveal">
+        <span class="value-icon">⭐</span>
+        <h3 class="value-title">Excellence</h3>
+        <p class="value-text">We don't compromise on quality. Every brick laid and every beam raised meets the highest standards of safety and craftsmanship.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cta">
+  <div class="cta-inner reveal">
+    <div class="section-label" style="justify-content:center; color:var(--gold);">Start Today</div>
+    <h2 class="cta-title">Ready to Build<br/>Your Dream?</h2>
+    <p class="cta-sub">Get a free consultation and detailed quotation from our expert team. No obligation, just honest advice.</p>
+    <div class="cta-form">
+      <input class="cta-input" type="text" id="userName" placeholder="Your Name"/>
+      <input class="cta-input" type="tel" id="userPhone" placeholder="Phone Number"/>
+      <button class="btn-cta" id="submitBtn">Get Free Quote</button>
+    </div>
+    <div class="contact-info">
+      <div class="contact-item">
+        <span class="contact-icon">📞</span>
+        <span>+91 8618829993</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">📧</span>
+        <span>mail id : info.ssconstructionsmys@gmail.com</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">📍</span>
+        <span>Mysuru, Karnataka</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="successModal" class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-icon">✓</div>
+    <h3>Request Received!</h3>
+    <p>Thank you! Your request has been securely sent. Our team will contact you shortly.</p>
+    <button id="closeModalBtn" class="btn-primary">Close</button>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">
+    Sri Siddheshwara Construction
+    <span>SSC © 2026-27 · All Rights Reserved</span>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#values">Our Values</a></li>
+    <li><a href="#cta">Contact</a></li>
+  </ul>
+  <div class="footer-copy">Crafted with ❤️ in Mysuru</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function() {
+  const canvas = document.getElementById('constructionCanvas');
+  if (!canvas) return;
+
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setClearColor(0x000000, 0);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 200);
+  camera.position.set(14, 10, 14);
+  camera.lookAt(0, 4, 0);
+
+  function resize() {
+    const w = canvas.parentElement.clientWidth;
+    const h = canvas.parentElement.clientHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Colors matching site palette
+  const GOLD   = new THREE.Color(0xc9a84c);
+  const NAVY   = new THREE.Color(0x1a2f5e);
+  const STEEL  = new THREE.Color(0xa8b8cc);
+  const WHITE  = new THREE.Color(0xf5f7fa);
+  const DIM    = new THREE.Color(0x3a4f6e);
+
+  function lineMat(color, opacity) {
+    return new THREE.LineBasicMaterial({ color, transparent: true, opacity: opacity || 1 });
+  }
+  function meshMat(color, opacity) {
+    return new THREE.MeshBasicMaterial({ color, transparent: true, opacity: opacity || 1, side: THREE.DoubleSide });
+  }
+
+  // ── Ground grid ──
+  const gridGeo = new THREE.BufferGeometry();
+  const gridVerts = [];
+  for (let i = -8; i <= 8; i++) {
+    gridVerts.push(i, 0, -8,  i, 0, 8);
+    gridVerts.push(-8, 0, i,  8, 0, i);
+  }
+  gridGeo.setAttribute('position', new THREE.Float32BufferAttribute(gridVerts, 3));
+  scene.add(new THREE.LineSegments(gridGeo, lineMat(NAVY, 0.5)));
+
+  // ── Helper: wireframe box ──
+  function wireBox(w, h, d, x, y, z, color, opacity) {
+    const geo = new THREE.BoxGeometry(w, h, d);
+    const edges = new THREE.EdgesGeometry(geo);
+    const line = new THREE.LineSegments(edges, lineMat(color, opacity || 0.9));
+    line.position.set(x, y + h / 2, z);
+    scene.add(line);
+    return line;
+  }
+
+  // ── Helper: solid box ──
+  function solidBox(w, h, d, x, y, z, color, opacity) {
+    const geo = new THREE.BoxGeometry(w, h, d);
+    const mesh = new THREE.Mesh(geo, meshMat(color, opacity || 0.18));
+    mesh.position.set(x, y + h / 2, z);
+    scene.add(mesh);
+    return mesh;
+  }
+
+  // ── Building floors ──
+  const floorCount = 7;
+  const floorHeight = 1.4;
+  const bW = 4, bD = 3;
+  const floors = [];
+  const floorFills = [];
+  for (let i = 0; i < floorCount; i++) {
+    floors.push(wireBox(bW, floorHeight, bD, 0, i * floorHeight, 0, STEEL, 0.55));
+    floorFills.push(solidBox(bW, floorHeight, bD, 0, i * floorHeight, 0, NAVY, 0.22));
+  }
+
+  // ── Roof accent ──
+  wireBox(bW, 0.3, bD, 0, floorCount * floorHeight, 0, GOLD, 1.0);
+
+  // ── Floor level indicators (glowing dots) ──
+  const dotGeo = new THREE.SphereGeometry(0.09, 8, 8);
+  for (let i = 0; i < floorCount; i++) {
+    const dot = new THREE.Mesh(dotGeo, meshMat(GOLD, 0.9));
+    dot.position.set(bW / 2 + 0.2, i * floorHeight + floorHeight / 2, 0);
+    scene.add(dot);
+  }
+
+  // ── Scaffolding on the right side ──
+  const scafColor = DIM;
+  for (let i = 0; i <= floorCount; i++) {
+    wireBox(0.15, 0.15, bD + 0.4, bW / 2 + 0.8, i * floorHeight, 0, scafColor, 0.7);
+  }
+  // vertical poles
+  for (let z = -bD / 2 - 0.2; z <= bD / 2 + 0.2; z += bD + 0.4) {
+    const poleGeo = new THREE.BufferGeometry();
+    poleGeo.setAttribute('position', new THREE.Float32BufferAttribute([
+      bW/2+0.8, 0, z,  bW/2+0.8, floorCount*floorHeight, z
+    ], 3));
+    scene.add(new THREE.Line(poleGeo, lineMat(scafColor, 0.6)));
+  }
+  // diagonal braces
+  for (let i = 0; i < floorCount; i++) {
+    const braceGeo = new THREE.BufferGeometry();
+    braceGeo.setAttribute('position', new THREE.Float32BufferAttribute([
+      bW/2+0.8, i*floorHeight, -bD/2-0.2,
+      bW/2+0.8, (i+1)*floorHeight, bD/2+0.2
+    ], 3));
+    scene.add(new THREE.Line(braceGeo, lineMat(scafColor, 0.4)));
+  }
+
+  // ── Tower crane ──
+  const craneGroup = new THREE.Group();
+  scene.add(craneGroup);
+
+  // mast
+  const mastGeo = new THREE.BufferGeometry();
+  mastGeo.setAttribute('position', new THREE.Float32BufferAttribute([
+    -3.5, 0, -2,  -3.5, floorCount*floorHeight + 3.5, -2
+  ], 3));
+  craneGroup.add(new THREE.Line(mastGeo, lineMat(GOLD, 0.8)));
+
+  // jib (horizontal arm)
+  const jibGeo = new THREE.BufferGeometry();
+  jibGeo.setAttribute('position', new THREE.Float32BufferAttribute([
+    -3.5, floorCount*floorHeight+3.5, -2,  2.5, floorCount*floorHeight+3.5, -2
+  ], 3));
+  craneGroup.add(new THREE.Line(jibGeo, lineMat(GOLD, 0.85)));
+
+  // counter-jib
+  const cjGeo = new THREE.BufferGeometry();
+  cjGeo.setAttribute('position', new THREE.Float32BufferAttribute([
+    -3.5, floorCount*floorHeight+3.5, -2,  -5.5, floorCount*floorHeight+3.5, -2
+  ], 3));
+  craneGroup.add(new THREE.Line(cjGeo, lineMat(GOLD, 0.6)));
+
+  // pendant cables
+  [[2.5, 0], [0.5, 0], [-1.5, 0]].forEach(([jx]) => {
+    const cGeo = new THREE.BufferGeometry();
+    cGeo.setAttribute('position', new THREE.Float32BufferAttribute([
+      jx, floorCount*floorHeight+3.5, -2,
+      -3.5, floorCount*floorHeight+3.5+1, -2
+    ], 3));
+    craneGroup.add(new THREE.Line(cGeo, lineMat(STEEL, 0.35)));
+  });
+
+  // hook line (animated)
+  const hookLine = (() => {
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.Float32BufferAttribute([
+      0.5, floorCount*floorHeight+3.5, -2,
+      0.5, floorCount*floorHeight+3.5, -2
+    ], 3));
+    const l = new THREE.Line(g, lineMat(WHITE, 0.7));
+    craneGroup.add(l);
+    return l;
+  })();
+
+  // hook box (load)
+  const hookBox = wireBox(0.55, 0.55, 0.55, 0.5, floorCount*floorHeight+3.5, -2, GOLD, 0.95);
+  hookBox.userData.isCrane = true;
+
+  // ── Dimension annotation lines ──
+  const annGeo = new THREE.BufferGeometry();
+  annGeo.setAttribute('position', new THREE.Float32BufferAttribute([
+    -bW/2-0.5, 0, 0,  -bW/2-0.5, floorCount*floorHeight, 0,
+    -bW/2-0.7, 0, 0,  -bW/2-0.3, 0, 0,
+    -bW/2-0.7, floorCount*floorHeight, 0,  -bW/2-0.3, floorCount*floorHeight, 0
+  ], 3));
+  scene.add(new THREE.LineSegments(annGeo, lineMat(STEEL, 0.3)));
+
+  // ── Floating particles (construction dust / sparks) ──
+  const particleCount = 60;
+  const pGeo = new THREE.BufferGeometry();
+  const pPos = new Float32Array(particleCount * 3);
+  const pVel = [];
+  for (let i = 0; i < particleCount; i++) {
+    pPos[i*3]   = (Math.random()-0.5)*10;
+    pPos[i*3+1] = Math.random()*12;
+    pPos[i*3+2] = (Math.random()-0.5)*8;
+    pVel.push({ vx:(Math.random()-0.5)*0.008, vy: 0.008+Math.random()*0.012, vz:(Math.random()-0.5)*0.008 });
+  }
+  pGeo.setAttribute('position', new THREE.Float32BufferAttribute(pPos, 3));
+  const particles = new THREE.Points(pGeo, new THREE.PointsMaterial({ color: GOLD, size: 0.06, transparent: true, opacity: 0.55 }));
+  scene.add(particles);
+
+  // ── Animation variables ──
+  let t = 0;
+  const totalH = floorCount * floorHeight + 3.5;
+
+  function animate() {
+    requestAnimationFrame(animate);
+    t += 0.012;
+
+    // Slow orbit of the whole scene
+    scene.rotation.y = t * 0.18;
+
+    // Crane hook bobbing up and down
+    const hookY = 1 + (floorCount-1)*floorHeight * (0.5 + 0.5*Math.sin(t*0.5));
+    hookBox.position.y = hookY + 0.275;
+    // Update hook line
+    const hPos = hookLine.geometry.attributes.position;
+    hPos.setXYZ(1, 0.5, hookY + 0.55, -2);
+    hPos.needsUpdate = true;
+
+    // Floor fill pulse opacity
+    floorFills.forEach((f, i) => {
+      f.material.opacity = 0.12 + 0.10 * Math.abs(Math.sin(t*0.6 + i * 0.7));
+    });
+
+    // Particle drift
+    const pp = particles.geometry.attributes.position;
+    for (let i = 0; i < particleCount; i++) {
+      let y = pp.getY(i) + pVel[i].vy;
+      let x = pp.getX(i) + pVel[i].vx;
+      let z = pp.getZ(i) + pVel[i].vz;
+      if (y > totalH + 1) { y = 0; x = (Math.random()-0.5)*10; z = (Math.random()-0.5)*8; }
+      pp.setXYZ(i, x, y, z);
+    }
+    pp.needsUpdate = true;
+
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
+</script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // Nav shadow on scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    nav.style.boxShadow = window.scrollY > 50 ? '0 4px 32px rgba(0,0,0,0.4)' : '';
+  });
+</script>
+
+<script type="module">
+  // 1. Import Firebase
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+  // 2. YOUR FIREBASE CONFIGURATION
+  const firebaseConfig = {
+    apiKey: "AIzaSyA4XtfRy-NiiQdOxY2A9mwnoNE-x6XeWKk",
+    authDomain: "ss-constructionsmys.firebaseapp.com",
+    projectId: "ss-constructionsmys",
+    storageBucket: "ss-constructionsmys.firebasestorage.app",
+    messagingSenderId: "296687663323",
+    appId: "1:296687663323:web:8e6054b79c54989cacf4fe"
+  };
+
+  // 3. Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // 4. Get the form and modal elements
+  const submitBtn = document.getElementById("submitBtn");
+  const nameInput = document.getElementById("userName");
+  const phoneInput = document.getElementById("userPhone");
+  const successModal = document.getElementById("successModal");
+  const closeModalBtn = document.getElementById("closeModalBtn");
+
+  // 5. Handle the button click
+  submitBtn.addEventListener("click", async () => {
+    const name = nameInput.value.trim();
+    const phone = phoneInput.value.trim();
+
+    if (!name || !phone) {
+      alert("Please enter both your name and phone number.");
+      return;
+    }
+
+    try {
+      submitBtn.textContent = "Sending...";
+
+      // A. Save to Firebase database silently
+      await addDoc(collection(db, "leads"), {
+        name: name,
+        phone: phone,
+        timestamp: new Date()
+      });
+
+      // B. Trigger the free Google Email Alert
+      const scriptURL = "https://script.google.com/macros/s/AKfycbxB-SV4R_UvwI0dA9nxwu_sWrnPhTCp6sLaLu8sU-FD9aIVSu8S1m_PFrpcVh3qMJM2-A/exec";
+      
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("phone", phone);
+      
+      // Notice that 'await' is removed from the fetch line below!
+      fetch(scriptURL, { 
+        method: "POST", 
+        body: formData, 
+        mode: "no-cors" 
+      }).catch(err => console.error("Email error:", err));
+
+      // C. Show the custom designed success popup
+      successModal.classList.add("show");
+
+      // D. Reset form
+      nameInput.value = "";
+      phoneInput.value = "";
+      submitBtn.textContent = "Get Free Quote";
+
+    } catch (error) {
+      console.error("Error adding document: ", error);
+      alert("Something went wrong. Please try again.");
+      submitBtn.textContent = "Get Free Quote";
+    }
+  });
+
+  // 6. Handle closing the popup
+  closeModalBtn.addEventListener("click", () => {
+    successModal.classList.remove("show");
+  });
+</script>
+</body>
+</html>
